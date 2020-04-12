@@ -39,12 +39,12 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
       const path = await filterImageFromURL(imageUrl)
       await res.status(200).sendFile(path, {}, (err) => {
         if (err) { 
-          return res.status(400).send(`Unable to process the image`); 
+          return res.status(422).send(`Unable to process the image`); 
         }
         deleteLocalFiles([path])
       })
     } catch (err) {
-      res.status(500).send(`Unable to process,check image url`);
+      res.status(422).send(`Unable to process,something went wrong`);
     }
   });
 
